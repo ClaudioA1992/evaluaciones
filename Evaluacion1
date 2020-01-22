@@ -1,0 +1,277 @@
+Funcion secuencia
+	
+	Escribir "Ingresar n°1:";
+	Leer n1;
+	
+	Escribir "Ingresar n°2:";
+	Leer n2;
+	
+	Escribir "Ingresar n°3:";
+	Leer n3;
+	
+	p<-(n1+n2+n3)/3;
+	
+	Escribir "El promedio es: " ,p;
+		
+FinFuncion
+
+Funcion Condicional_si_entonces
+	
+	Definir nombre como caracter;
+	Definir genero como entero;
+	
+	Escribir "Ingrese su nombre";
+	
+	Leer nombre;
+	
+	Escribir "Ingrese su género";
+	Escribir "1. Hombre";
+	Escribir "2. Mujer";
+	
+	Leer genero;
+	
+	Si genero=1 entonces
+		
+		Escribir "Ingrese al baño de varones";
+		
+	FinSi
+	
+	Si genero=2 entonces
+		
+		Escribir "Ingrese al baño de mujeres";
+		
+	FinSi
+	
+FinFuncion
+
+Funcion si_entonces_anidado
+	
+	Definir nombre,uso como caracter;
+	Definir genero como entero;
+	
+	Escribir "Ingrese su nombre";
+	
+	Leer nombre;
+		
+	Escribir "Ingrese su género";
+	Escribir "1. Hombre";
+	Escribir "2. Mujer";
+		
+	Leer genero;
+		
+	Si genero=1 entonces
+			
+		Escribir "Ingrese al baño de varones";
+		
+		Escribir "¿Desea usar baño o ducha?";
+		
+		Leer uso;
+		
+		Si uso="ducha" entonces
+			
+			Escribir "Valor: $2500";
+			
+		Sino
+				
+			Escribir "Valor: $250";
+			
+		FinSi
+	
+	FinSi
+		
+	Si genero=2 entonces
+			
+		Escribir "Ingrese al baño de mujeres";
+		
+		Escribir "¿Desea usar baño o ducha?";
+		
+		Leer uso;
+		
+		Si uso="ducha" entonces
+			
+			Escribir "Valor: $2500";
+			
+		Sino
+			
+			Escribir "Valor: $250";
+			
+		FinSi
+			
+	FinSi
+					
+FinFuncion
+
+Funcion condicional_segun
+	
+	Escribir "Ingrese un número del 1 al 10";
+	
+	Leer n;
+	
+	Segun n hacer
+		
+		1: Escribir "Uno";
+		2: Escribir "Dos";
+		3: Escribir "Tres";
+		4: Escribir "Cuatro";
+		5: Escribir "Cinco";
+		6: Escribir "Seis";
+		7: Escribir "Siete";
+		8: Escribir "Ocho";
+		9: Escribir "Nueve";
+		10: Escribir "Diez";
+		
+	FinSegun
+	
+FinFuncion
+
+Funcion repetitivamientras
+	
+	Definir suma,n,cont como entero;
+	
+	Definir m como real;
+	
+	Escribir "Escribir un número";
+	
+	m<-0;
+	n<-0;
+	cont<-0;
+	
+	Leer n;
+	
+	Mientras n!=0 Hacer
+		
+		Leer n;
+		
+		m<-n+m;
+		
+		cont<-cont+1;
+		
+	FinMientras
+	
+    m<-m/cont;
+	
+	Escribir "Promedio es: " ,m;
+		
+FinFuncion
+
+Funcion repetitivarepetir
+	
+	Definir nombre como caracter;
+	
+	Definir cont como entero;
+	
+	Repetir 
+		
+		Escribir "Escribir nombre";
+		
+		Leer nombre;
+		
+		cont<-cont+1;
+		
+	Hasta Que nombre="Juan"
+	
+	Escribir "Intentos para el ingreso de Juan: " ,cont;
+
+FinFuncion
+
+Funcion repetitivapara
+
+	Definir nombres como caracter;
+	Definir i,j,aux,contr como entero;
+	
+	Dimension repeticion[10],nombres[10],aux[10];
+	
+	Para i<-0 hasta 9 con paso 1 hacer
+		
+		aux[i]<-0;
+		
+	FinPara
+	
+	Para i<-0 hasta 9 con paso 1 hacer
+		
+		j<-i;
+		
+		Escribir "Ingresar nombre: ";
+		
+		Leer nombres[i];
+		
+		nombres[j]<-nombres[i];
+		
+	FinPara
+	
+	Para i<-0 hasta 9 con paso 1 Hacer
+		
+		Para j<-0 hasta 9 con paso 1 Hacer
+			
+			Si nombres[i]=nombres[j] Entonces
+				
+				Si i=j entonces;
+					
+				j<-i;
+				
+				Sino 
+									
+				aux[j]<-aux[j]+1;
+					
+			    FinSi			
+			
+			FinSi
+			
+		FinPara	
+		
+	FinPara
+	
+	Para i<-0 hasta 9 con paso 1 Hacer
+		
+		Si aux[i]>0 entonces;
+			
+			Escribir ,nombres[i], " se repitió más de una vez.";
+			contr<-1;
+			
+		FinSi
+		
+	FinPara
+	
+	Si contr=0 entonces;
+		
+		Escribir "Ningún nombre se repitió.";
+		
+	FinSi
+	
+FinFuncion
+
+Funcion alumnosfullstack
+	
+	Definir alumnos como caracter;
+	
+	Definir i,n como entero;
+	
+	Escribir "¿Cuantos alumnos desea ingresar?";
+	
+	Leer n;
+	
+	Dimension alumnos[n];
+	
+	Escribir "Ingresar alumnos individualmente";
+	
+	Para i<-0 hasta n con paso 1 Hacer;
+		
+		Leer alumnos[i]
+		
+	FinPara
+	
+	Para i<-0 hasta n con paso 1 Hacer;
+		
+		
+		
+	FinPara
+	
+FinFuncion
+
+
+	
+Algoritmo funciones
+	
+	repetitivapara();
+		
+FinAlgoritmo
