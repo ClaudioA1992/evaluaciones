@@ -1,0 +1,113 @@
+CREATE DATABASE ong;
+
+USE ong;
+
+CREATE TABLE sede
+(
+codigo_sede int NOT NULL PRIMARY KEY,
+ciudad varchar(20) NOT NULL,
+domicilio varchar(60) NOT NULL,
+director varchar(30) NOT NULL
+);
+
+CREATE TABLE socio
+(
+codigo_socio int NOT NULL PRIMARY KEY,
+codigo_sede int NOT NULL,
+rut_socio int NOT NULL,
+nombre_socio varchar(25) NOT NULL,
+apellido1_socio varchar(20) NOT NULL,
+apellido2_socio varchar(20) NOT NULL,
+fecha_nacimiento_socio date NOT NULL,
+telefono_socio int NULL,
+email_socio varchar(50) NULL,
+cuenta_bancaria int NOT NULL,
+fecha_pago date NOT NULL,
+tipo_cuota int NOT NULL,
+FOREIGN KEY (codigo_sede) REFERENCES sede(codigo_sede)
+); 
+
+CREATE TABLE personal
+(
+codigo_personal int NOT NULL PRIMARY KEY,
+codigo_sede int NOT NULL,
+rut_personal int NOT NULL,
+nombre_personal varchar(30) NOT NULL,
+apellido1_personal varchar(20) NOT NULL,
+apellido2_personal varchar(20) NOT NULL,
+fecha_nacimiento_personal date NOT NULL,
+telefono_personal int NULL,
+email_personal varchar(60) NULL,
+tipo_personal varchar(15) NOT NULL,
+FOREIGN KEY (codigo_sede) REFERENCES sede(codigo_sede)
+);
+
+CREATE TABLE personal_sanitario
+(
+codigo_personal int NOT NULL PRIMARY KEY,
+profesion varchar(30) NOT NULL,
+disponibilidad varchar(2) NOT NULL,
+numero_trabajos int NOT NULL,
+FOREIGN KEY (codigo_personal) REFERENCES personal(codigo_personal)
+);
+
+CREATE TABLE envio
+(
+codigo_envio int NOT NULL PRIMARY KEY,
+ciudad_destino varchar(20) NOT NULL,
+fecha_entrega date NOT NULL,
+tipo_envio int NOT NULL,
+estado_envio varchar(20) NOT NULL
+);
+
+CREATE TABLE alimento
+(
+codigo_alimento int NOT NULL PRIMARY KEY,
+descripcion_alimento varchar(100) NOT NULL
+nombre_ali varchar (30) NOT NULL
+);
+
+CREATE TABLE medicamento
+(
+codigo_medicamento int NOT NULL PRIMARY KEY,
+descripcion_medicamento varchar(100) NOT NULL
+nombre_meds varchar (30) NOT NULL
+);
+
+CREATE TABLE organizacion_envio
+(
+codigo_envio int NOT NULL,
+codigo_sede int NOT NULL,
+FOREIGN KEY (codigo_envio) REFERENCES envio(codigo_envio),
+FOREIGN KEY (codigo_sede) REFERENCES sede(codigo_sede),
+PRIMARY KEY (codigo_envio, codigo_sede)
+);
+
+CREATE TABLE ayuda_humanitaria
+(
+codigo_envio int NOT NULL,
+codigo_personal int NOT NULL,
+FOREIGN KEY (codigo_envio) REFERENCES envio(codigo_envio),
+FOREIGN KEY (codigo_personal) REFERENCES personal_sanitario(codigo_personal),
+PRIMARY KEY (codigo_envio, codigo_personal)
+);
+
+CREATE TABLE detalle_alimento
+(
+codigo_envio int NOT NULL,
+codigo_alimento int NOT NULL,
+cantidadKG decimal(10,3) NOT NULL,
+FOREIGN KEY (codigo_envio) REFERENCES envio(codigo_envio),
+FOREIGN KEY (codigo_alimento) REFERENCES alimento(codigo_alimento),
+PRIMARY KEY (codigo_envio, codigo_alimento)
+);
+
+CREATE TABLE detalle_medicamento
+(
+codigo_envio int NOT NULL,
+codigo_medicamento int NOT NULL,
+cantidadUnitaria int NOT NULL,
+FOREIGN KEY (codigo_envio) REFERENCES envio(codigo_envio),
+FOREIGN KEY (codigo_medicamento) REFERENCES medicamento(codigo_medicamento),
+PRIMARY KEY (codigo_envio, codigo_medicamento)
+);
