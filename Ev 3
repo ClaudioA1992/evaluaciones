@@ -1,0 +1,83 @@
+Evaluación 3
+
+1-
+CREATE DATABASE ev3vehiculos;
+USE ev3vehiculos;
+CREATE TABLE empleado (idEmpleado INT NOT NULL PRIMARY KEY, nombreEmpleado VARCHAR(30),  fechaIngreso DATE);
+CREATE TABLE servicio (idServicio INT NOT NULL PRIMARY KEY, nombreServicio VARCHAR(30), valorServicio INT); 
+CREATE TABLE vehiculo (idVehiculo INT NOT NULL PRIMARY KEY, marcaVehiculo VARCHAR(15), modeloVehiculo VARCHAR (15)); 
+CREATE TABLE prestación_servicio (idPrestacionServicio INT NOT NULL PRIMARY KEY, idServicio INT NOT NULL, idEmpleado INT NOT NULL, idVehiculo INT NOT NULL, fecha DATE,
+                                 FOREIGN KEY (IdServicio) REFERENCES servicio(IdServicio), FOREIGN KEY (idEmpleado) REFERENCES empleado(idEmpleado), FOREIGN KEY (idVehiculo)
+                                  REFERENCES vehiculo(idVehiculo)); 
+a.-
+
+SELECT *
+FROM prestación_servicio
+WHERE fecha BETWEEN 2018-10-01 AND 2018-11-26
+
+b.- 
+
+SELECT COUNT(*)
+FROM prestación_servicio
+GROUP BY idVehiculo
+
+c.-
+
+SELECT COUNT(prestación_servicio.idVehiculo)
+FROM vehiculo
+JOIN prestación_servicio ON(vehiculo.idVehiculo=prestación_servicio.idVehiculo)
+GROUP BY prestación_servicio.idVehiculo
+ORDER BY (COUNT(vehiculo.idVehiculo)) ASC
+LIMIT 3
+
+2-
+
+CREATE TABLE 'empleado' ('IdEmpleado' INT NOT NULL PRIMARY KEY, 
+'nombre' VARCHAR(20) NOT NULL, 'apellido' VARCHAR(20), 
+'direccion' VARCHAR(70), 'telefono' INT,
+'idDepartamento' INT NOT NULL)
+
+3-
+
+Traspaso de idea sobre tabla y sus campos
+
+Cine (puede tener mas de una sala, cada semana se envia una cartelera para
+dicha semana, para cada funcion se conoce el dia de la semana y la hora de
+comienzo, y la sala y la pelicula que exhibe)(nombre, direccion, telefono)
+
+Peliculas (Titulo distribucion, titulo original, genero, idioma original,
+si tiene subs en esp o no, paises de origen, año de prod, url del sitio web
+de la pelicula, duracion (en horas y minutos, la calificacion de edad (apta
+para todo publico, +9 años, +15 años, +18 años), fecha de estreno en Stgo,
+un resumen y un identificador de la pelicula, lista de directores, reparto
+con cada personaje interpretado)
+
+Directores(nombre (PK), nacionalidad, cantidad de películas dirigidas)
+
+Actores(nombre (PK), nacionalidad, cantidad de películas actuadas)
+
+Salas(nombre, numero, numero que la identifica dentro del cine, cantidad
+de butacas que posee)
+
+Promociones(dependen de la funcion(ej: de lunes a jueves antes de las 18,
+50% de dsct en la sala x del cine para x película)
+
+Opinion(nombre de quien opina, edad, fecha de registro de opinion, califi-
+cación que le dió(obra maestra, muy buena, buena, regular, mala) y el co-
+mentario propiamente dicho, PK)
+
+
+Generación de modelo a través de Power Designer
+
+sala es la tabla principal. Posee funciones y es parte de cine. Cada una con sus campos
+y keys respectibas. Funcion posee varias keys para reforzar su importancia dentro del 
+funcionamiento del cine. Funcion posee promocion, que a la ves es promocion de películas.
+Peliculas posee opinion, de la cual se describe quien la emite, con su key respectiva por
+opinion emitida. Realizadores son parte de las peliculas del cine en cartelera, como también
+de peliculas que no son parte de ella, por lo que se asignó una tabla extra para demostrar
+que su trabajo no se limita al que el cine exhibe.
+
+La redacción se realizó siguiendo las reglas de PK y foreign keys, en el orden que hace
+posible su generación. Además se traspasan los datos importantes de cada tabla, para recuperarlos
+y utilizarlos en las tablas que sean necesarias.
+
